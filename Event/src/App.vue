@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const showCreateForm = ref(false)
+const showSignup = ref(false)
 
 const events = ref([
   {
@@ -30,46 +31,29 @@ const events = ref([
   }
 ])
 
-const newEvent = ref({
-  title: '',
-  date: '',
-  time: '',
-  location: '',
-  description: ''
-})
+const title = ref('')
+const date = ref('')
+const time = ref('')
+const location = ref('')
+const description = ref('')
 
 function openCreateForm() {
   showCreateForm.value = true
+  showSignup.value = false
 }
 
-function createEvent() {
-  events.value.push({
-    id: Date.now(),
-    title: newEvent.value.title,
-    date: newEvent.value.date,
-    time: newEvent.value.time,
-    location: newEvent.value.location,
-    participants: 1
-  })
-
-  newEvent.value = {
-    title: '',
-    date: '',
-    time: '',
-    location: '',
-    description: ''
-  }
-
-  showCreateForm.value = false
+function openSignup() {
+  showSignup.value = true
 }
 </script>
 
 <template>
   <main class="page">
+
     <header class="header">
       <h1>Events</h1>
 
-      <div class="location">
+      <div class="location-box">
         <p>+ Standort</p>
         <p>Bochum</p>
       </div>
@@ -79,7 +63,7 @@ function createEvent() {
       </button>
     </header>
 
-    <section class="events-grid">
+    <section class="events">
       <div v-for="event in events" :key="event.id" class="event-card">
         <h2>[ {{ event.title }} ]</h2>
         <p>📅 {{ event.date }}</p>
@@ -87,69 +71,61 @@ function createEvent() {
         <p>📍 {{ event.location }}</p>
         <p>👥 {{ event.participants }} Teilnehmer</p>
 
-        <button class="join-button">Beitreten</button>
+        <button class="join-button">
+          Beitreten
+        </button>
       </div>
     </section>
 
-    <section v-if="showCreateForm" class="form-section">
-      <div class="form-left">
-        <h2>Neues Event erstellen</h2>
-        <p>
-          Um ein neues Event zu erstellen,
-          musst du dich zuerst registrieren.
-        </p>
-        <button class="signup-button">Sign-up</button>
-      </div>
+    <section v-if="showCreateForm" class="create-area">
 
-      <form class="event-form" @submit.prevent="createEvent">
-        <label>
-          Titel:
-          <input v-model="newEvent.title" type="text" placeholder="z.B. Fußball spielen" required>
-        </label>
+      <form class="event-form" @submit.prevent="openSignup">
+        <label>Title:</label>
+        <input v-model="title" type="text" required>
 
-        <label>
-          Datum:
-          <input v-model="newEvent.date" type="text" placeholder="TT.MM.JJJJ" required>
-        </label>
+        <label>Datum:</label>
+        <input v-model="date" type="text" required>
 
-        <label>
-          Uhrzeit:
-          <input v-model="newEvent.time" type="text" placeholder="--:--" required>
-        </label>
+        <label>Uhrzeit:</label>
+        <input v-model="time" type="text" required>
 
-        <label>
-          Standort:
-          <input v-model="newEvent.location" type="text" placeholder="z.B. Bochum" required>
-        </label>
+        <label>Standort:</label>
+        <input v-model="location" type="text" required>
 
-        <label>
-          Beschreibung:
-          <textarea v-model="newEvent.description" placeholder="Beschreibung des Events"></textarea>
-        </label>
+        <label>Beschreibung:</label>
+        <input v-model="description" type="text">
 
         <button class="submit-button" type="submit">
           erstellen
         </button>
       </form>
+
+      <div v-if="showSignup" class="signup-box">
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Vorname">
+        <input type="email" placeholder="email:">
+        <input type="password" placeholder="password:">
+
+        <button class="signup-button">
+          Sign-up
+        </button>
+      </div>
+
     </section>
+
   </main>
 </template>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #edf5a8;
+  background-color: #edf5a8;
 }
 
 .page {
   min-height: 100vh;
-  padding: 20px 50px;
-  background: #edf5a8;
+  padding: 30px 50px;
 }
 
 .header {
@@ -160,129 +136,138 @@ body {
 
 h1 {
   margin: 0;
+  background-color: #f5f5c9;
+  padding: 10px 40px 25px 10px;
   font-size: 36px;
-  background: #f5f5c9;
-  padding: 10px 35px 25px 5px;
 }
 
-.location {
+.location-box {
   margin-right: auto;
   margin-left: 40px;
   font-size: 24px;
-  line-height: 1.4;
 }
 
-.location p {
-  margin: 0 0 10px;
-}
-
-.create-button,
-.join-button,
-.signup-button,
-.submit-button {
-  border: none;
-  background: #003c9e;
-  color: white;
-  border-radius: 30px;
-  cursor: pointer;
+.location-box p {
+  margin: 0 0 10px 0;
 }
 
 .create-button {
-  background: #2d007d;
-  padding: 18px 45px;
+  background-color: #2d007d;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 18px 40px;
   font-size: 20px;
+  cursor: pointer;
 }
 
-.events-grid {
+.events {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   gap: 60px;
-  margin-top: 120px;
+  margin-top: 110px;
 }
 
 .event-card {
+  background-color: #ddffd7;
   width: 300px;
-  min-height: 190px;
-  background: #ddffd7;
+  padding: 30px 20px;
   text-align: center;
-  padding: 35px 20px 20px;
 }
 
 .event-card h2 {
   font-size: 17px;
-  margin: 0 0 8px;
 }
 
 .event-card p {
-  margin: 3px 0;
-  font-size: 16px;
+  margin: 5px 0;
 }
 
 .join-button {
-  margin-top: 20px;
+  margin-top: 18px;
+  background-color: #003c9e;
+  color: white;
+  border: none;
+  border-radius: 30px;
   padding: 10px 35px;
-  font-size: 16px;
+  cursor: pointer;
 }
 
-.form-section {
-  display: flex;
-  gap: 40px;
-  width: 70%;
+.create-area {
+  position: relative;
+  width: 700px;
+  min-height: 330px;
   margin: 100px auto 0;
-  padding: 40px;
-  background: #ddffd7;
-}
-
-.form-left {
-  width: 35%;
-  border-right: 1px solid #999;
-  padding-right: 40px;
-}
-
-.form-left h2 {
-  margin-top: 0;
-}
-
-.form-left p {
-  margin-top: 70px;
-  font-size: 20px;
-  line-height: 1.5;
-}
-
-.signup-button {
-  margin-top: 20px;
-  padding: 12px 30px;
-  font-size: 16px;
+  background-color: #ddffd7;
+  padding: 30px;
 }
 
 .event-form {
-  width: 65%;
+  width: 250px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
 }
 
 .event-form label {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.event-form input {
+  width: 120px;
+  border: none;
+  border-bottom: 2px solid gray;
+  background-color: transparent;
   font-size: 18px;
-}
-
-.event-form input,
-.event-form textarea {
-  padding: 12px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-}
-
-.event-form textarea {
-  min-height: 80px;
+  outline: none;
 }
 
 .submit-button {
-  align-self: center;
-  padding: 12px 50px;
+  position: absolute;
+  bottom: 25px;
+  left: 330px;
+  background-color: #003c9e;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 45px;
   font-size: 18px;
+  cursor: pointer;
+}
+
+.signup-box {
+  position: absolute;
+  top: 20px;
+  left: 250px;
+  width: 330px;
+  background-color: #d7ffd7;
+  border: 5px solid white;
+  padding: 20px;
+  box-shadow: -25px 15px 30px gray;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.signup-box input {
+  border: none;
+  border-bottom: 2px solid gray;
+  background-color: transparent;
+  font-size: 22px;
+  padding: 5px;
+  outline: none;
+}
+
+.signup-button {
+  width: 120px;
+  margin: 5px auto 0;
+  background-color: #003c9e;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>

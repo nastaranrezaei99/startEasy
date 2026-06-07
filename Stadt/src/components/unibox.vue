@@ -29,7 +29,8 @@
   padding: 30px;
   position: absolute;
   top: 0;
-  left: 380px;
+  left: 330px;
+  z-index: 10;
 }
 
 .box a {

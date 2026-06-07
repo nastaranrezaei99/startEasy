@@ -56,6 +56,7 @@ function submitForm() {
   border-bottom: 2px solid gray;
   background-color: transparent;
   font-size: 18px;
+   outline: none;
 }
 
 .submit-button {

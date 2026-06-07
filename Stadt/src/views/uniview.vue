@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue"
+import UniBox from "../components/UniBox.vue"
 
 const showUniversities = ref(false)
 </script>
@@ -11,7 +12,6 @@ const showUniversities = ref(false)
       <h1>Bochum</h1>
 
       <span>+ Standort</span>
-
       <span>Erste Schritte</span>
 
       <span
@@ -29,53 +29,13 @@ const showUniversities = ref(false)
     </div>
 
     <div class="background">
-
-      <div v-if="showUniversities" class="box">
-
-        <a
-          href="https://www.ruhr-uni-bochum.de/"
-          target="_blank"
-        >
-          Ruhr-Universität Bochum (RUB)
-        </a>
-
-        <a
-          href="https://www.hochschule-bochum.de/"
-          target="_blank"
-        >
-          Hochschule Bochum
-        </a>
-
-        <a
-          href="https://www.hs-gesundheit.de/"
-          target="_blank"
-        >
-          Hochschule für Gesundheit (HSZG)
-        </a>
-
-        <a
-          href="https://www.thga.de/"
-          target="_blank"
-        >
-          Technische Hochschule Georg Agricola (THGA)
-        </a>
-
-        <a
-          href="https://www.folkwang-uni.de/"
-          target="_blank"
-        >
-          Folkwang Universität der Künste
-        </a>
-
-      </div>
-
+      <UniBox v-if="showUniversities" />
     </div>
 
   </div>
 </template>
 
 <style scoped>
-
 .page {
   min-height: 100vh;
   background-color: #e5ec98;
@@ -118,27 +78,4 @@ const showUniversities = ref(false)
   background-position: center;
   position: relative;
 }
-
-.box {
-  background-color: #e5ec98;
-  width: 330px;
-  padding: 30px;
-  position: absolute;
-  top: 0;
-  left: 380px;
-}
-
-.box a {
-  display: block;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  margin-bottom: 25px;
-  line-height: 1.3;
-}
-
-.box a:hover {
-  text-decoration: underline;
-}
-
 </style>

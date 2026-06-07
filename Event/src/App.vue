@@ -4,6 +4,9 @@ import { ref } from 'vue'
 const showCreateForm = ref(false)
 const showSignup = ref(false)
 
+//eine Liste von schon ertellten Events
+//ich habe ref benutzt, da wi neue Events hinzufügen möchten und das braucen wir für später
+
 const events = ref([
   {
     id: 1,
@@ -30,6 +33,7 @@ const events = ref([
     participants: 5
   }
 ])
+//Jetzt ist die Variabeln leer, damit die Nutzer in Formuler die info ausfüllen
 
 const title = ref('')
 const date = ref('')
@@ -37,6 +41,13 @@ const time = ref('')
 const location = ref('')
 const description = ref('')
 
+
+const name = ref('')
+const vorname = ref('')
+const email = ref('')
+const password = ref('')
+
+//Eventerstellung öffnen
 function openCreateForm() {
   showCreateForm.value = true
   showSignup.value = false
@@ -47,6 +58,7 @@ function openSignup() {
 }
 </script>
 
+<!--HTML-->
 <template>
   <main class="page">
 
@@ -64,12 +76,12 @@ function openSignup() {
     </header>
 
     <section class="events">
-      <div v-for="event in events" :key="event.id" class="event-card">
-        <h2>[ {{ event.title }} ]</h2>
-        <p>📅 {{ event.date }}</p>
-        <p>🕒 {{ event.time }}</p>
-        <p>📍 {{ event.location }}</p>
-        <p>👥 {{ event.participants }} Teilnehmer</p>
+      <div v-for="event in events"  class="event-card">
+        <h2> {{ event.title }} </h2>
+        <p> {{ event.date }}</p>
+        <p> {{ event.time }}</p>
+        <p> {{ event.location }}</p>
+        <p> {{ event.participants }} Teilnehmer</p>
 
         <button class="join-button">
           Beitreten
@@ -79,9 +91,13 @@ function openSignup() {
 
     <section v-if="showCreateForm" class="create-area">
 
+      <!--Es ist eine Button mit Type submit, damit wir später die Info sammeln können-->
+      <!--prevent ist dafür die Seitge nicht aktualisiert werden-->
       <form class="event-form" @submit.prevent="openSignup">
-        <label>Title:</label>
+        <label>Titel:</label>
         <input v-model="title" type="text" required>
+
+
 
         <label>Datum:</label>
         <input v-model="date" type="text" required>
@@ -220,7 +236,7 @@ h1 {
   border-bottom: 2px solid gray;
   background-color: transparent;
   font-size: 18px;
-  outline: none;
+  
 }
 
 .submit-button {
@@ -230,7 +246,7 @@ h1 {
   background-color: #003c9e;
   color: white;
   border: none;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 14px 45px;
   font-size: 18px;
   cursor: pointer;

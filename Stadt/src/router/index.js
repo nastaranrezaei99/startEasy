@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import UniView from '../views/uniview.vue'
 import EventView from '../views/eventview.vue'
 import ErsteSchrittView from '../views/ersteschrittview.vue'
+import MarketplaceView from '../views/marketplaceview.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,10 @@ const router = createRouter({
     {
       path: '/erste-schritte',
       component: ErsteSchrittView
+    },
+    {
+      path: '/Marketplace',
+      component: MarketplaceView
     }
   ]
 })

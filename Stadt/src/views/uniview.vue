@@ -30,7 +30,9 @@ const showUniversities = ref(false)
         Events
       </RouterLink>
 
-      <span>Marketplace</span>
+      <RouterLink to="/Marketplace" class="menu-link">
+        Marketplace
+      </RouterLink>
 
       <span class="city-name">
         Bochum

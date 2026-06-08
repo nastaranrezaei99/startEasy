@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue"
-import UniBox from "../components/UniBox.vue"
+import UniBox from "../components/unibox.vue"
 
 const showUniversities = ref(false)
 </script>
@@ -12,7 +12,12 @@ const showUniversities = ref(false)
 
       <h1>StartEasy</h1>
 
-      <span>Erste Schritte</span>
+      <RouterLink
+      to="/erste-schritte"
+      class="menu-link"
+      >
+      Erste Schritte
+      </RouterLink>
 
       <span
         @click="showUniversities = !showUniversities"

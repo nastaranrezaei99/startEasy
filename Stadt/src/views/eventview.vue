@@ -50,7 +50,6 @@ function openSignup() {
       <h1>Events</h1>
 
       <div class="location-box">
-        <p>+ Standort</p>
         <p>Bochum</p>
       </div>
 
@@ -102,12 +101,13 @@ h1 {
 
 .location-box {
   margin-right: auto;
-  margin-left: 40px;
+  margin-left: 500px;
   font-size: 24px;
 }
 
 .location-box p {
   margin: 0 0 10px 0;
+ 
 }
 
 .create-button {
@@ -135,4 +135,5 @@ h1 {
   background-color: #ddffd7;
   padding: 30px;
 }
+
 </style>

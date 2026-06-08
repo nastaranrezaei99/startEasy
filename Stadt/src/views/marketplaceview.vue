@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import MarketplaceCard from '../components/MarketplaceCard.vue'
 import MarketplaceForm from '../components/MarketplaceForm.vue'
-import SignupBox from '../components/SignupBox.vue'
+import SignupBox from '../components/SignupBox copy.vue'
 
 const showCreateForm = ref(false)
 const showSignup = ref(false)

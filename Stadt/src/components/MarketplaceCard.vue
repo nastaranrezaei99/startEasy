@@ -1,7 +1,15 @@
 <script setup>
+import { ref } from 'vue'
+
 const props = defineProps({
   item: Object
 })
+
+const showContact = ref(false)
+
+function toggleContact() {
+  showContact.value = !showContact.value
+}
 </script>
 
 <template>
@@ -12,9 +20,13 @@ const props = defineProps({
     <p>{{ props.item.description }}</p>
     <p>{{ props.item.location }}</p>
 
-    <button class="contact-button">
+    <button class="contact-button" @click="toggleContact">
       Kontakt
     </button>
+
+    <p v-if="showContact" class="contact-info">
+      {{ props.item.contact }}
+    </p>
   </div>
 </template>
 

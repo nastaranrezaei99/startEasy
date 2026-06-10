@@ -10,6 +10,7 @@ const todos = ref([
   { id: 6, text: 'Termin bei der Ausländerbehörde buchen', done: false },
   { id: 7, text: 'Wohnung oder Wohnheim organisieren', done: false },
   { id: 8, text: 'Notrufnummern kennenlernen', done: false }
+  
 ])
 
 </script>

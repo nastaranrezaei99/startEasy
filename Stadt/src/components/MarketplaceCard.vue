@@ -20,33 +20,36 @@ const props = defineProps({
 
 <style>
 .marketplace-card {
-  background-color: #ddffd7;
+  background-color: #846c4b;
   width: 300px;
   padding: 0 0 25px 0;
   text-align: center;
+  border-radius: 20px;
 }
 
 .marketplace-card img {
   width: 300px;
   height: 180px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 .marketplace-card h2 {
   font-size: 18px;
   margin: 12px 0 5px 0;
   font-weight: normal;
+  color:white;
 }
 
 .marketplace-card p {
   margin: 5px 0;
   font-size: 16px;
+   color:white;
 }
 
 .contact-button {
   margin-top: 18px;
-  background-color: #003c9e;
+  background-color: #483826;
   color: white;
   border: none;
   border-radius: 30px;

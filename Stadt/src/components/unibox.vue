@@ -24,7 +24,7 @@
 
 <style scoped>
 .box {
-  background-color: #e5ec98;
+  background-color: #f9fbe2;
   width: 330px;
   padding: 30px;
   position: absolute;

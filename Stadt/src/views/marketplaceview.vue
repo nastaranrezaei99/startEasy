@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import MarketplaceCard from '../components/MarketplaceCard.vue'
 import MarketplaceForm from '../components/MarketplaceForm.vue'
-import SignupBox from '../components/SignupBox copy.vue'
+import SignupBox from '../components/SignupBox.vue'
 
 const showCreateForm = ref(false)
 const showSignup = ref(false)
@@ -70,7 +70,7 @@ function openSignup() {
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #edf5a8;
+  background-color: #f9fbe2;
 }
 
 .page {
@@ -86,9 +86,10 @@ body {
 
 h1 {
   margin: 0;
-  background-color: #f5f5c9;
-  padding: 10px 40px 25px 10px;
+  background-color: #e1e0ca;
+  padding: 10px 20px 10px 20px;
   font-size: 36px;
+  text-align: center;
 }
 
 .location-box {
@@ -102,7 +103,7 @@ h1 {
 }
 
 .create-button {
-  background-color: #2d007d;
+  background-color: #483826;
   color: white;
   border: none;
   border-radius: 30px;
@@ -123,7 +124,11 @@ h1 {
   width: 700px;
   min-height: 470px;
   margin: 100px auto 0;
-  background-color: #ddffd7;
+  background-color: #846C4B;
+  backdrop-filter: blur(8px);
+  color: #846C4B;
   padding: 30px;
+  border-radius: 20px;
+  color: white;
 }
 </style>

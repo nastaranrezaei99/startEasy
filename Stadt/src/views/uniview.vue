@@ -51,7 +51,7 @@ const showUniversities = ref(false)
 
 .page {
   min-height: 100vh;
-  background-color: #e5ec98;
+  background-color: #f9fbe2;
   font-family: Arial, sans-serif;
 }
 
@@ -65,7 +65,7 @@ const showUniversities = ref(false)
 
 .nav h1 {
   margin: 0;
-  background-color: #f5f3d0;
+  background-color: #e1e0ca;
   padding: 15px 35px;
 }
 
@@ -73,7 +73,7 @@ const showUniversities = ref(false)
   margin-left: auto;
   font-weight: bold;
   font-size: 24px;
-  background-color: #f5f3d0;
+  background-color: #e1e0ca;
   padding: 15px 35px;
 }
 
@@ -92,8 +92,8 @@ const showUniversities = ref(false)
 }
 
 .background {
-  height: 80vh;
-  margin: 0 35px;
+  height: 100vh;
+  margin: 0;
   background-image: url("/bochum_rathaus.jpg");
   background-size: cover;
   background-position: center;

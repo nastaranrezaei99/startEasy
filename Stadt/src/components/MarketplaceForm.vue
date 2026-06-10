@@ -46,13 +46,13 @@ function submitForm() {
   width: 500px;
   display: flex;
   flex-direction: column;
+  
 }
 
 .marketplace-form label {
   font-size: 20px;
-  font-weight: bold;
   margin-top: 22px;
-  color: #24506b;
+  color: white;
 }
 
 .marketplace-form input {
@@ -74,7 +74,7 @@ function submitForm() {
 .submit-button {
   margin-top: 25px;
   width: 120px;
-  background-color: #003c9e;
+  background-color: #483826;
   color: white;
   border: none;
   border-radius: 12px;

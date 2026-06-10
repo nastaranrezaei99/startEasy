@@ -49,8 +49,9 @@ const password = ref('')
   left: 160px;
   width: 520px;
   min-height: 260px;
-  background-color: #d7ffd7;
+  background-color: #846c4b;
   border: 5px solid white;
+  
   padding: 25px;
   box-shadow: -25px 15px 30px gray;
   display: flex;
@@ -63,6 +64,7 @@ const password = ref('')
   display: flex;
   flex-direction: column;
   gap: 15px;
+  
 }
 
 .signin-part h2,
@@ -78,18 +80,19 @@ const password = ref('')
 
 .signup-box input {
   border: none;
-  border-bottom: 2px solid gray;
-  background-color: transparent;
+  border-bottom: 2px solid white;
+ 
   font-size: 20px;
   padding: 5px;
   outline: none;
+  
 }
 
 .signin-button,
 .signup-button {
   width: 120px;
   margin: 10px auto 0;
-  background-color: #003c9e;
+  background-color: #483826;
   color: white;
   border: none;
   border-radius: 30px;

@@ -111,7 +111,7 @@ h1 {
 }
 
 .create-button {
-  background-color: #2d007d;
+  background-color: #483826;
   color: white;
   border: none;
   border-radius: 30px;
@@ -132,8 +132,9 @@ h1 {
   width: 700px;
   min-height: 330px;
   margin: 100px auto 0;
-  background-color: #ddffd7;
+  background-color: rgb(132, 108, 78,0.555);
   padding: 30px;
+  color: white;
 }
 
 </style>

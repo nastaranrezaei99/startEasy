@@ -20,7 +20,7 @@ const props = defineProps({
 
 <style>
 .event-card {
-  background-color: #ddffd7;
+  background-color: #846c4b;
   width: 300px;
   padding: 30px 20px;
   text-align: center;
@@ -28,15 +28,17 @@ const props = defineProps({
 
 .event-card h2 {
   font-size: 17px;
+  color: white;
 }
 
 .event-card p {
   margin: 5px 0;
+  color: white;
 }
 
 .join-button {
   margin-top: 18px;
-  background-color: #003c9e;
+  background-color: #483826;
   color: white;
   border: none;
   border-radius: 30px;

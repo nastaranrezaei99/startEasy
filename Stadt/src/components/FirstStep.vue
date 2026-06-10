@@ -14,7 +14,7 @@ import Checklist from './Checklist.vue'
         Wichtige Informationen für internationale Studierende in Bochum
       </p>
     </div>
-
+    <Checklist />
     <section class="cards">
       <InfoCard
         title="Mobilität"
@@ -58,14 +58,14 @@ import Checklist from './Checklist.vue'
       />
     </section>
 
-    <Checklist />
+    
   </main>
 </template>
 
 <style scoped>
 .page {
   min-height: 100vh;
-  background-color: #e5ec98;
+  background-color: #f9fbe2;
   font-family: Arial, sans-serif;
   padding-bottom: 50px;
 }
@@ -78,7 +78,7 @@ import Checklist from './Checklist.vue'
 }
 
 .title-box {
-  background-color: #f5f3d0;
+  
   padding: 15px 35px;
 }
 

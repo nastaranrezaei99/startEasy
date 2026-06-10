@@ -39,31 +39,31 @@ function submitForm() {
 
 <style>
 .event-form {
-  width: 250px;
+   width: 500px;
   display: flex;
   flex-direction: column;
 }
 
 .event-form label {
   font-size: 20px;
-  font-weight: bold;
-  margin-top: 12px;
+  margin-top: 22px;
+  color: white;
 }
 
 .event-form input {
-  width: 120px;
-  border: none;
-  border-bottom: 2px solid gray;
-  background-color: transparent;
+  width: 470px;
+  height: 32px;
+  border: 1px solid gray;
+  background-color: white;
   font-size: 18px;
-   outline: none;
+  outline: none;
 }
 
 .submit-button {
   position: absolute;
   bottom: 25px;
   left: 330px;
-  background-color: #003c9e;
+  background-color: #483826;
   color: white;
   border: none;
   border-radius: 10px;

@@ -36,7 +36,7 @@ const todos = ref([
 .checklist {
   max-width: 1350px;
   margin: 60px auto;
-  background-color: #f5f3d0;
+  background-color: #846c4b;
   padding: 35px;
   border-radius: 18px;
 }
@@ -45,6 +45,7 @@ const todos = ref([
   margin-bottom: 20px;
   text-align: center;
   font-size: 30px;
+  color: white;
 }
 
 

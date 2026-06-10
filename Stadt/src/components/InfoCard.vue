@@ -49,7 +49,7 @@ defineProps({
 <style scoped>
 
 .card {
-  background-color: #f5f3d0;
+  background-color: #846c4b;
   border-radius: 22px;
   overflow: hidden;
   width: 330px;
@@ -68,11 +68,13 @@ defineProps({
 .card h2 {
   margin: 0 0 15px;
   font-size: 26px;
+  color: white;
 }
 
 .card p {
   font-size: 18px;
   line-height: 1.5;
+  color: white;
 }
 
 .links {

@@ -1,23 +1,21 @@
 <script setup>
-import Checklist from './Components/Checklist.vue';
-import FirstStep from './Components/FirstStep.vue';
-import InfoCard from './Components/InfoCard.vue';
-</script>
+import Checklist from '../components/Checklist.vue'
+import PersonalChecklist from '../components/PersonalChecklist.vue'
+import FirstStep from '../components/FirstStep.vue'
+import InfoCard from '../components/InfoCard.vue'
 
+</script>
 
 <template>
 
-<FirstStep />
+  <FirstStep />
 
-
+  
 
 
 </template>
 
-
-
 <style>
-
 html,
 body,
 #app {
@@ -25,4 +23,11 @@ body,
   padding: 0;
 }
 
+.checklists {
+  max-width: 1400px;
+  margin: 60px auto;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
 </style>

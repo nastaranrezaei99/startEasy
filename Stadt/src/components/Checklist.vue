@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+
 
 const todos = ref([
   {
@@ -91,18 +92,27 @@ function handleCheck(todo) {
 function closePopup() {
   showPopup.value = false
 }
+const progress = computed(() => {
+  const done = todos.value.filter(todo => todo.done).length
+  return Math.round((done / todos.value.length) * 100)
+})
+
 </script>
 
 <template>
-  <div class="checklist">
+  <div class="checklist-box">
     <h2>Checkliste</h2>
 
+    <div class="progress-text">
+      Fortschritt: {{ progress }}%
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" :style="{ width: progress + '%' }"></div>
+    </div>
+
     <div v-for="todo in todos" :key="todo.id" class="todo-item">
-      <input
-        type="checkbox"
-        v-model="todo.done"
-        @change="handleCheck(todo)"
-      >
+      <input type="checkbox" v-model="todo.done" @change="handleCheck(todo)">
 
       <span :class="{ done: todo.done }">
         {{ todo.text }}
@@ -111,7 +121,7 @@ function closePopup() {
 
     <div v-if="showPopup" class="popup-overlay">
       <div class="popup-card">
-        <img :src="activeTodo.image" class="celebration-image" alt="Success"/>
+        <img :src="activeTodo.image" class="celebration-image" alt="Success">
 
         <h3>{{ activeTodo.successMessage }}</h3>
 
@@ -130,30 +140,48 @@ function closePopup() {
 </template>
 
 <style scoped>
-.checklist {
-  max-width: 1350px;
-  margin: 60px auto;
-  background-color: #846c4b;
+.checklist-box {
+  flex: 1;
+  background: #f5f3d0;
   padding: 35px;
   border-radius: 18px;
+  min-height: 650px;
 }
 
-.checklist h2 {
-  margin-bottom: 20px;
+h2 {
   text-align: center;
-  font-size: 30px;
-  color: white;
+  margin-bottom: 20px;
+}
+
+.progress-text {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #8a704d;
+  transition: .3s;
 }
 
 .todo-item {
   background: white;
+  padding: 15px;
   margin-bottom: 12px;
-  padding: 14px;
-  font-size: 18px;
+  border-radius: 10px;
 }
 
 .todo-item input {
-  margin-right: 12px;
+  margin-right: 10px;
 }
 
 .done {

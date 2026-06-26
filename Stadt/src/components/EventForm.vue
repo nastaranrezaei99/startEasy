@@ -42,6 +42,7 @@ function submitForm() {
    width: 500px;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
 }
 
 .event-form label {

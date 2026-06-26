@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-//ref macht die Daten reaktiv. Wenn sich ein Wert ändert, wird die Oberfläche automatisch aktualisiert!!
+
 const todos = ref([
   { id: 1, text: 'Anmeldung beim Bürgerbüro', done: false },
   { id: 2, text: 'Krankenversicherung abschließen', done: false },
@@ -12,19 +12,34 @@ const todos = ref([
   { id: 8, text: 'Notrufnummern kennenlernen', done: false }
 ])
 
+const progress = computed(() => {
+  const done = todos.value.filter(todo => todo.done).length
+  return Math.round((done / todos.value.length) * 100)
+})
 </script>
 
 <template>
-  <div class="checklist">
+  <div class="checklist-box">
     <h2>Checkliste</h2>
-    <!-- v-for erzeugt für jede Aufgabe ein Element -->
-    <div v-for="todo in todos":key="todo.id" class="todo-item">
 
-      <!-- v-model verbindet Checkbox und done-Wert -->
-       <!--Two-Way-Databinding-->
+    <div class="progress-text">
+      Fortschritt: {{ progress }}%
+    </div>
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        :style="{ width: progress + '%' }"
+      ></div>
+    </div>
+
+    <div
+      v-for="todo in todos"
+      :key="todo.id"
+      class="todo-item"
+    >
       <input type="checkbox" v-model="todo.done">
 
-      <!--Wenn todo.done true ist, wird die CSS-Klasse done hinzugefügt und der Text wird durchgestrichen-->
       <span :class="{ done: todo.done }">
         {{ todo.text }}
       </span>
@@ -33,31 +48,48 @@ const todos = ref([
 </template>
 
 <style scoped>
-.checklist {
-  max-width: 1350px;
-  margin: 60px auto;
-  background-color: #f5f3d0;
+.checklist-box {
+  flex: 1;
+  background: #f5f3d0;
   padding: 35px;
   border-radius: 18px;
+  min-height: 650px;
 }
 
-.checklist h2 {
-  margin-bottom: 20px;
+h2 {
   text-align: center;
-  font-size: 30px;
+  margin-bottom: 20px;
 }
 
+.progress-text {
+  text-align: center;
+  margin-bottom: 10px;
+}
 
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #8a704d;
+  transition: .3s;
+}
 
 .todo-item {
   background: white;
+  padding: 15px;
   margin-bottom: 12px;
-  padding: 14px;
-  font-size: 18px;
+  border-radius: 10px;
 }
 
 .todo-item input {
-  margin-right: 12px;
+  margin-right: 10px;
 }
 
 .done {

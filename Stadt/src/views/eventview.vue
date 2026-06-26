@@ -125,6 +125,7 @@ h1 {
   justify-content: center;
   gap: 60px;
   margin-top: 110px;
+  border-radius: 20px;
 }
 
 .create-area {
@@ -132,9 +133,10 @@ h1 {
   width: 700px;
   min-height: 330px;
   margin: 100px auto 0;
-  background-color: rgb(132, 108, 78,0.555);
+  background-color: #483826;
   padding: 30px;
   color: white;
+
 }
 
 </style>

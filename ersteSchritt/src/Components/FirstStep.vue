@@ -1,6 +1,7 @@
 <script setup>
 import InfoCard from './InfoCard.vue'
 import Checklist from './Checklist.vue'
+import PersonalChecklist from './PersonalChecklist.vue'
 </script>
 
 <template>
@@ -15,12 +16,16 @@ import Checklist from './Checklist.vue'
       </p>
     </div>
 
+    <div class="checklists">
+      <Checklist />
+      <PersonalChecklist />
+    </div>
+
     <section class="cards">
       <InfoCard
         title="Mobilität"
         image="/deutschlandticket.jpg"
-        text="Das Deutschlandticket gilt für Busse, Straßenbahnen, U-Bahnen und Regionalzüge in ganz Deutschland. Es gilt jedoch nicht für Fernverkehrszüge wie ICE, IC oder EC.
-        Für längere Strecken zwischen Städten sind ICE-Züge oft schneller, aber meistens teurer. FlixBus kann eine günstigere Alternative sein. Ein Preisvergleich vor der Buchung lohnt sich besonders für Studierende."
+        text="Das Deutschlandticket gilt für Busse, Straßenbahnen, U-Bahnen und Regionalzüge in ganz Deutschland. Es gilt jedoch nicht für Fernverkehrszüge wie ICE, IC oder EC. Für längere Strecken zwischen Städten sind ICE-Züge oft schneller, aber meistens teurer. FlixBus kann eine günstigere Alternative sein. Ein Preisvergleich vor der Buchung lohnt sich besonders für Studierende."
         link1Name="Deutsche Bahn"
         link1Url="https://www.bahn.de"
         link2Name="FlixBus"
@@ -57,15 +62,14 @@ import Checklist from './Checklist.vue'
         link2Url="https://www.aok.de"
       />
     </section>
-
-    <Checklist />
   </main>
 </template>
 
 <style scoped>
+
 .page {
   min-height: 100vh;
-  background-color: #e5ec98;
+  background-color: #f9fbe2;
   font-family: Arial, sans-serif;
   padding-bottom: 50px;
 }
@@ -78,7 +82,6 @@ import Checklist from './Checklist.vue'
 }
 
 .title-box {
-  background-color: #f5f3d0;
   padding: 15px 35px;
 }
 
@@ -97,7 +100,15 @@ import Checklist from './Checklist.vue'
   display: flex;
   justify-content: center;
   gap: 35px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 40px;
+}
+
+.checklists {
+  max-width: 1400px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
 }
 </style>

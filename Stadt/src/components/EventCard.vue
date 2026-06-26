@@ -24,6 +24,7 @@ const props = defineProps({
   width: 300px;
   padding: 30px 20px;
   text-align: center;
+  border-radius: 20px;
 }
 
 .event-card h2 {

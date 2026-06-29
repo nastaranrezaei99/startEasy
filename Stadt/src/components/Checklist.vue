@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 
 
 const todos = ref([
@@ -79,6 +79,7 @@ const todos = ref([
   }
 ])
 
+
 const showPopup = ref(false)
 const activeTodo = ref(null)
 
@@ -96,6 +97,21 @@ const progress = computed(() => {
   const done = todos.value.filter(todo => todo.done).length
   return Math.round((done / todos.value.length) * 100)
 })
+onMounted(() => {
+  const saved = localStorage.getItem('todos')
+
+  if (saved) {
+    todos.value = JSON.parse(saved)
+  }
+})
+
+watch(
+  todos,
+  () => {
+    localStorage.setItem('todos', JSON.stringify(todos.value))
+  },
+  { deep: true }
+)
 
 </script>
 

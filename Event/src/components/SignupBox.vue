@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
+
 
 const loginEmail = ref('')
 const loginPassword = ref('')
@@ -8,6 +10,36 @@ const name = ref('')
 const vorname = ref('')
 const email = ref('')
 const password = ref('')
+async function register() {
+  if (!name.value || !vorname.value || !email.value || !password.value) {
+    alert('Bitte alle Felder ausfüllen.')
+    return
+  }
+
+  const response = await axios.post('http://127.0.0.1:8000/api/register', {
+    name: name.value + ' ' + vorname.value,
+    email: email.value,
+    password: password.value
+  })
+
+  alert('Registrierung erfolgreich')
+  console.log(response.data)
+}
+async function login() {
+  if (!loginEmail.value || !loginPassword.value) {
+    alert('Bitte E-Mail und Passwort eingeben.')
+    return
+  }
+
+  const response = await axios.post('http://127.0.0.1:8000/api/login', {
+    email: loginEmail.value,
+    password: loginPassword.value
+  })
+
+  alert(response.data.message)
+  console.log(response.data)
+  
+}
 </script>
 
 <template>
@@ -19,7 +51,7 @@ const password = ref('')
       <input v-model="loginEmail" type="email" placeholder="email:">
       <input v-model="loginPassword" type="password" placeholder="password:">
 
-      <button class="signin-button">
+      <button type="button" class="signin-button" @click="login">
         Sign-in
       </button>
     </div>
@@ -34,7 +66,7 @@ const password = ref('')
       <input v-model="email" type="email" placeholder="email:">
       <input v-model="password" type="password" placeholder="password:">
 
-      <button class="signup-button">
+      <button type="button" class="signup-button" @click="register">
         Sign-up
       </button>
     </div>

@@ -31,7 +31,7 @@ function closeSignup() {
 async function addEvent(newEvent) {
   const response = await axios.post('http://127.0.0.1:8000/api/events', newEvent)
   events.value.push(response.data)
-  showSignup.value = true
+  showSignup.value = false
 }
 
 async function joinEvent(id) {

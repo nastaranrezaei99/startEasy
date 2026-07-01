@@ -1,5 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
+
+const emit = defineEmits(['authSuccess'])
+
+const API_URL = 'http://127.0.0.1:8000/api'
 
 const loginEmail = ref('')
 const loginPassword = ref('')
@@ -8,6 +13,85 @@ const name = ref('')
 const vorname = ref('')
 const email = ref('')
 const password = ref('')
+
+const errorMessage = ref('')
+const successMessage = ref('')
+
+function getToken(response) {
+  return response.data.token ||
+         response.data.access_token ||
+         response.data.accessToken ||
+         response.data.plainTextToken
+}
+
+async function signIn() {
+  try {
+    errorMessage.value = ''
+    successMessage.value = ''
+
+    const response = await axios.post(`${API_URL}/login`, {
+      email: loginEmail.value,
+      password: loginPassword.value
+    })
+
+    const token = getToken(response)
+
+    if (!token) {
+      errorMessage.value = 'Kein Token erhalten.'
+      return
+    }
+
+    localStorage.setItem('token', token)
+    emit('authSuccess', token)
+  } catch (error) {
+    console.error(error.response?.data || error)
+
+    if (error.response?.data?.message) {
+      errorMessage.value = error.response.data.message
+    } else if (error.response?.data?.errors) {
+      const errors = error.response.data.errors
+      errorMessage.value = Object.values(errors).flat().join(' ')
+    } else {
+      errorMessage.value = 'Sign In fehlgeschlagen.'
+    }
+  }
+}
+
+async function signUp() {
+  try {
+    errorMessage.value = ''
+    successMessage.value = ''
+
+    const fullName = `${vorname.value} ${name.value}`.trim()
+
+    await axios.post(`${API_URL}/register`, {
+      name: fullName,
+      email: email.value,
+      password: password.value,
+      password_confirmation: password.value
+    })
+
+    successMessage.value = 'Registrierung erfolgreich. Bitte melde dich jetzt mit Sign-in an.'
+
+    // Email direkt ins Sign-in-Feld übernehmen
+    loginEmail.value = email.value
+    loginPassword.value = ''
+
+    // Sign-up Passwortfeld leeren
+    password.value = ''
+  } catch (error) {
+    console.error(error.response?.data || error)
+
+    if (error.response?.data?.message) {
+      errorMessage.value = error.response.data.message
+    } else if (error.response?.data?.errors) {
+      const errors = error.response.data.errors
+      errorMessage.value = Object.values(errors).flat().join(' ')
+    } else {
+      errorMessage.value = 'Sign-up fehlgeschlagen.'
+    }
+  }
+}
 </script>
 
 <template>
@@ -19,7 +103,7 @@ const password = ref('')
       <input v-model="loginEmail" type="email" placeholder="Email">
       <input v-model="loginPassword" type="password" placeholder="Password">
 
-      <button class="signin-button">
+      <button class="signin-button" type="button" @click="signIn">
         Sign In
       </button>
     </div>
@@ -34,10 +118,18 @@ const password = ref('')
       <input v-model="email" type="email" placeholder="Email">
       <input v-model="password" type="password" placeholder="Password">
 
-      <button class="signup-button">
+      <button class="signup-button" type="button" @click="signUp">
         Sign Up
       </button>
     </div>
+
+    <p v-if="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </p>
+
+    <p v-if="successMessage" class="success-message">
+     {{ successMessage }}
+    </p>
 
   </div>
 </template>
@@ -96,5 +188,23 @@ const password = ref('')
   padding: 10px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.error-message {
+  position: absolute;
+  right: -170px;
+  top: 30px;
+  width: 150px;
+  color: red;
+  font-weight: bold;
+}
+
+.success-message {
+  position: absolute;
+  right: -220px;
+  top: 85px;
+  width: 200px;
+  color: green;
+  font-weight: bold;
 }
 </style>

@@ -2,6 +2,14 @@
 const props = defineProps({
   item: Object
 })
+
+function showContact() {
+  if (props.item.contact) {
+    alert(`Kontakt: ${props.item.contact}`)
+  } else {
+    alert('Keine Kontaktinformation vorhanden.')
+  }
+}
 </script>
 
 <template>
@@ -12,7 +20,7 @@ const props = defineProps({
     <p>{{ props.item.description }}</p>
     <p>{{ props.item.location }}</p>
 
-    <button class="contact-button">
+    <button class="contact-button" type="button" @click="showContact">
       Kontakt
     </button>
   </div>

@@ -3,44 +3,54 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $user = new User();
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+        ]);
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
 
-        $user->save();
+        $token = $user->createToken('api-token')->plainTextToken;
 
-        return response()->json($user);
+        return response()->json([
+            'user' => $user,
+            'token' => $token,
+        ], 201);
     }
 
     public function login(Request $request)
     {
-        $user = User::where('email', $request->input('email'))->first();
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
-        if (!$user) {
+        $user = User::where('email', $validated['email'])->first();
+
+        if (!$user || !Hash::check($validated['password'], $user->password)) {
             return response()->json([
-                'error' => 'Benutzer nicht gefunden.'
-            ], 404);
+                'message' => 'Email oder Passwort ist falsch.',
+            ], 401);
         }
 
-        if (!Hash::check($request->input('password'), $user->password)) {
-            return response()->json([
-                'error' => 'Passwort ist falsch.'
-            ], 400);
-        }
+        $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
-            'message' => 'Login erfolgreich.',
-            'user' => $user
-        ]);
+            'user' => $user,
+            'token' => $token,
+        ], 200);
     }
 }
